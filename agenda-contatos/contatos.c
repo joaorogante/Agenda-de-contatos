@@ -86,3 +86,22 @@ void salvarAgenda(Contato *agenda, int numContatos) {
     fclose(arquivo);
     printf("Agenda salva com sucesso!\n");
 }
+void carregarAgenda(Contato *agenda, int *numContatos) {
+    FILE *arquivo = fopen("agenda.bin", "rb");
+    if (arquivo == NULL) {
+        printf("Arquivo de agenda não encontrado.\n");
+        return;
+    }
+
+    fread(numContatos, sizeof(int), 1, arquivo);
+    for (int i = 0; i < *numContatos; i++) {
+        fscanf(arquivo, "%[^|]|", agenda[i].nome);
+        fscanf(arquivo, "%[^|]|", agenda[i].sobrenome);
+        fscanf(arquivo, "%[^|]|", agenda[i].email);
+        fscanf(arquivo, "%[^\n]\n", agenda[i].telefone);
+    }
+
+    fclose(arquivo);
+    printf("Agenda carregada com sucesso!\n");
+    printf("A agenda foi carregada com %d contatos.\n", *numContatos);
+}
