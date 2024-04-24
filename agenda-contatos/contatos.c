@@ -22,3 +22,14 @@ void adicionarContato(Contato *agenda, int *numContatos) {
     (*numContatos)++;
     printf("Contato adicionado com sucesso!\n");
 }
+void listarContatos(Contato *agenda, int numContatos) {
+    if (numContatos == 0) {
+        printf("A agenda está vazia.\n");
+        return;
+    }
+
+    printf("Lista de contatos:\n");
+    for (int i = 0; i < numContatos; i++) {
+        printf("%d. %s %s, %s, %s\n", i + 1, agenda[i].nome, agenda[i].sobrenome, agenda[i].email, agenda[i].telefone);
+    }
+}
