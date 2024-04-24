@@ -63,3 +63,26 @@ void deletarContato(Contato *agenda, int *numContatos) {
     (*numContatos)--;
     printf("Contato deletado com sucesso!\n");
 }
+void salvarAgenda(Contato *agenda, int numContatos) {
+    FILE *arquivo = fopen("agenda.bin", "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para gravação.\n");
+        return;
+    }
+
+    fwrite(&numContatos, sizeof(int), 1, arquivo);
+
+    for (int i = 0; i < numContatos; i++) {
+        fwrite(agenda[i].nome, sizeof(char), strlen(agenda[i].nome) + 1, arquivo);
+        fputc('|', arquivo); 
+        fwrite(agenda[i].sobrenome, sizeof(char), strlen(agenda[i].sobrenome) + 1, arquivo);
+        fputc('|', arquivo); 
+        fwrite(agenda[i].email, sizeof(char), strlen(agenda[i].email) + 1, arquivo);
+        fputc('|', arquivo); 
+        fwrite(agenda[i].telefone, sizeof(char), strlen(agenda[i].telefone) + 1, arquivo);
+        fputc('\n', arquivo); 
+    }
+
+    fclose(arquivo);
+    printf("Agenda salva com sucesso!\n");
+}
