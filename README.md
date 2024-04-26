@@ -17,22 +17,6 @@ Funcionalidades:
 Compilação e Execução:
 O projeto é composto por três arquivos: main.c, contatos.c e contatos.h. Para compilar e executar o programa, siga estas etapas:
 
-Compilação:
-
-Em um terminal ou prompt de comando, navegue até o diretório onde os arquivos-fonte estão localizados.
-Compile os arquivos usando um compilador C.
-
-Esse comando criará um executável chamado "agenda" (ou "agenda.exe" ).
-
-
-Execução:
-
-Após a compilação bem-sucedida, execute o programa digitando:
-Copy code./agenda
-
-
-Uso:
-
 O programa exibirá um menu com opções para adicionar, listar, excluir contatos, salvar e carregar a agenda.
-Digite o número correspondente à opção desejada e siga as instruções.
+Digite o número correspondente à opção desejada e siga as informações.
 Para sair do programa, escolha a opção "0".
