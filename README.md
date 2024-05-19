@@ -14,9 +14,11 @@ Funcionalidades:
 
 5. **Carregar agenda**: O programa pode carregar a agenda de contatos anteriormente salva no arquivo "agenda.bin".
 
-Compilação e Execução:
+## Compilação e Execução:
 O projeto é composto por três arquivos: main.c, contatos.c e contatos.h. Para compilar e executar o programa, siga estas etapas:
 
-O programa exibirá um menu com opções para adicionar, listar, excluir contatos, salvar e carregar a agenda.
-Digite o número correspondente à opção desejada e siga as informações.
-Para sair do programa, escolha a opção "0".
+Para compilar e executar o programa, utilize os seguintes comandos:
+
+```bash
+gcc -o agenda main.c contatos.c
+./agenda
