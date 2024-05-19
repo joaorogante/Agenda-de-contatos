@@ -29,10 +29,15 @@ void listarContatos(Contato *agenda, int numContatos) {
     }
 
     printf("Lista de contatos:\n");
-    for (int i = 0; i < numContatos; i++) {
-        printf("%d. %s %s, %s, %s\n", i + 1, agenda[i].nome, agenda[i].sobrenome, agenda[i].email, agenda[i].telefone);
+   for (int i = 0; i < totalContatos; i++) {
+        printf("Contato %d:\n", i + 1);
+        printf("Nome: %s\n", contatos[i].nome);
+        printf("Sobrenome: %s\n", contatos[i].sobrenome);
+        printf("Email: %s\n", contatos[i].email);
+        printf("Telefone: %s\n", contatos[i].telefone);
     }
 }
+
 void deletarContato(Contato *agenda, int *numContatos) {
     if (*numContatos == 0) {
         printf("A agenda está vazia.\n");
@@ -63,45 +68,33 @@ void deletarContato(Contato *agenda, int *numContatos) {
     (*numContatos)--;
     printf("Contato deletado com sucesso!\n");
 }
-void salvarAgenda(Contato *agenda, int numContatos) {
-    FILE *arquivo = fopen("agenda.bin", "wb");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo para gravação.\n");
-        return;
+void salvarAgendaBinario() {
+    FILE *file = fopen("agenda.bin", "wb");
+    if (file != NULL) {
+        fwrite(contatos, sizeof(Contato), totalContatos, file);
+        fclose(file);
+        printf("Agenda salva com sucesso.\n");
+    } else {
+        printf("Erro ao abrir o arquivo para escrita.\n");
     }
-
-    fwrite(&numContatos, sizeof(int), 1, arquivo);
-
-    for (int i = 0; i < numContatos; i++) {
-        fwrite(agenda[i].nome, sizeof(char), strlen(agenda[i].nome) + 1, arquivo);
-        fputc('|', arquivo); 
-        fwrite(agenda[i].sobrenome, sizeof(char), strlen(agenda[i].sobrenome) + 1, arquivo);
-        fputc('|', arquivo); 
-        fwrite(agenda[i].email, sizeof(char), strlen(agenda[i].email) + 1, arquivo);
-        fputc('|', arquivo); 
-        fwrite(agenda[i].telefone, sizeof(char), strlen(agenda[i].telefone) + 1, arquivo);
-        fputc('\n', arquivo); 
-    }
-
-    fclose(arquivo);
-    printf("Agenda salva com sucesso!\n");
 }
-void carregarAgenda(Contato *agenda, int *numContatos) {
-    FILE *arquivo = fopen("agenda.bin", "rb");
-    if (arquivo == NULL) {
-        printf("Arquivo de agenda não encontrado.\n");
-        return;
-    }
 
-    fread(numContatos, sizeof(int), 1, arquivo);
-    for (int i = 0; i < *numContatos; i++) {
-        fscanf(arquivo, "%[^|]|", agenda[i].nome);
-        fscanf(arquivo, "%[^|]|", agenda[i].sobrenome);
-        fscanf(arquivo, "%[^|]|", agenda[i].email);
-        fscanf(arquivo, "%[^\n]\n", agenda[i].telefone);
+void carregarAgendaBinario() {
+    FILE *file = fopen("agenda.bin", "rb");
+    if (file != NULL) {
+        totalContatos = fread(contatos, sizeof(Contato), MAX_CONTATOS, file);
+        fclose(file);
+        printf("Agenda carregada com sucesso.\n");
+    } else {
+        printf("Erro ao abrir o arquivo para leitura.\n");
     }
+}
 
-    fclose(arquivo);
-    printf("Agenda carregada com sucesso!\n");
-    printf("A agenda foi carregada com %d contatos.\n", *numContatos);
+bool validarTelefone(const char *telefone) {
+    for (int i = 0; telefone[i] != '\0'; i++) {
+        if (!isdigit(telefone[i])) {
+            return false;
+        }
+    }
+    return true;
 }
