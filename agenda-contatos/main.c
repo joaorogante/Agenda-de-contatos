@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include "contatos.h"
 
-#define MAX_CONTATOS 100
-
-Contato agenda[MAX_CONTATOS];
-int totalContatos = 0;
-
 int main() {
     int opcao;
+    int numContatos = 0;
+    Contato agenda[MAX_CONTATOS];
+
     do {
         printf("\nMenu:\n");
         printf("1. Adicionar contato\n");
@@ -16,30 +14,30 @@ int main() {
         printf("4. Salvar agenda\n");
         printf("5. Carregar agenda\n");
         printf("6. Sair\n");
-        printf("Escolha uma opcao: ");
+        printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
-                adicionarContato(agenda, &totalContatos);
+                adicionarContato(agenda, &numContatos);
                 break;
             case 2:
-                listarContatos(agenda, totalContatos);
+                listarContatos(agenda, numContatos);
                 break;
             case 3:
-                deletarContato(agenda, &totalContatos);
+                deletarContato(agenda, &numContatos);
                 break;
             case 4:
-                salvarAgendaBinaria(agenda, totalContatos);
+                salvarAgendaBinario(agenda, numContatos);
                 break;
             case 5:
-                carregarAgendaBinaria(agenda, &totalContatos);
+                carregarAgendaBinario(agenda, &numContatos);
                 break;
             case 6:
                 printf("Saindo...\n");
                 break;
             default:
-                printf("Opcao invalida. Tente novamente.\n");
+                printf("Opção inválida.\n");
         }
     } while (opcao != 6);
 
