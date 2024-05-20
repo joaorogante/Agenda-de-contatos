@@ -1,19 +1,23 @@
-#ifndef CONTATOS_H
-#define CONTATOS_H
+#ifndef CONTATO_H
+#define CONTATO_H
 
-#define MAX_CONTATOS 255
+#include <stdbool.h>
+
+#define MAX_CONTATOS 100
 
 typedef struct {
     char nome[50];
     char sobrenome[50];
-    char email[100];
+    char email[50];
     char telefone[20];
 } Contato;
 
 void adicionarContato(Contato *agenda, int *numContatos);
 void listarContatos(Contato *agenda, int numContatos);
 void deletarContato(Contato *agenda, int *numContatos);
-void salvarAgenda(Contato *agenda, int numContatos);
-void carregarAgenda(Contato *agenda, int *numContatos);
+void salvarAgendaBinario(Contato *agenda, int numContatos);
+void carregarAgendaBinario(Contato *agenda, int *numContatos);
+bool validarTelefone(const char *telefone);
 
-#endif
+#endif // CONTATO_H
+
