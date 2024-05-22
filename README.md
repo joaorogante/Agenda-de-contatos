@@ -23,4 +23,5 @@ Este projeto é um gerenciador de contatos em C que permite ao usuário adiciona
 
 Para compilar o projeto, você precisa de um compilador C (como gcc). Abra o terminal na raiz do projeto e execute o seguinte comando:
 
+```sh
 gcc main.c contatos.c -o gerenciador_contatos
