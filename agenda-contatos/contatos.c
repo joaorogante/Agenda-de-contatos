@@ -103,3 +103,11 @@ int editarContato(Contato contatos[], int totalContatos) {
     printf("Contato não encontrado.\n");
     return 0;
 }
+void listarContatos(Contato contatos[], int totalContatos) {
+    printf("\nLista de Contatos:\n");
+    printf("-------------------------------------------------\n");
+    for (int i = 0; i < totalContatos; i++) {
+        printf("Nome: %s\nEmail: %s\nTelefone: %s\n", contatos[i].nome, contatos[i].email, contatos[i].telefone);
+        printf("-------------------------------------------------\n");
+    }
+}
