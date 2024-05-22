@@ -15,3 +15,11 @@ int validarEmail(const char *email) {
     regfree(&regex);
     return result == 0;
 }
+int telefoneUnico(const char *telefone, Contato contatos[], int totalContatos) {
+    for (int i = 0; i < totalContatos; i++) {
+        if (strcmp(contatos[i].telefone, telefone) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
