@@ -60,3 +60,46 @@ int adicionarContato(Contato contatos[], int *totalContatos) {
     printf("Contato adicionado com sucesso!\n");
     return 1;
 }
+int editarContato(Contato contatos[], int totalContatos) {
+    char telefone[15];
+    printf("Telefone do contato a ser editado: ");
+    fgets(telefone, sizeof(telefone), stdin);
+    telefone[strcspn(telefone, "\n")] = '\0';
+
+    for (int i = 0; i < totalContatos; i++) {
+        if (strcmp(contatos[i].telefone, telefone) == 0) {
+            char novoNome[50], novoEmail[50], novoTelefone[15];
+            printf("Novo nome (deixe em branco para não alterar): ");
+            fgets(novoNome, sizeof(novoNome), stdin);
+            novoNome[strcspn(novoNome, "\n")] = '\0';
+
+            printf("Novo email (deixe em branco para não alterar): ");
+            fgets(novoEmail, sizeof(novoEmail), stdin);
+            novoEmail[strcspn(novoEmail, "\n")] = '\0';
+
+            printf("Novo telefone (deixe em branco para não alterar): ");
+            fgets(novoTelefone, sizeof(novoTelefone), stdin);
+            novoTelefone[strcspn(novoTelefone, "\n")] = '\0';
+
+            if (novoNome[0]) strcpy(contatos[i].nome, novoNome);
+            if (novoEmail[0]) {
+                if (!validarEmail(novoEmail)) {
+                    printf("Formato de email inválido.\n");
+                    return 0;
+                }
+                strcpy(contatos[i].email, novoEmail);
+            }
+            if (novoTelefone[0]) {
+                if (!telefoneUnico(novoTelefone, contatos, totalContatos)) {
+                    printf("Telefone já existe.\n");
+                    return 0;
+                }
+                strcpy(contatos[i].telefone, novoTelefone);
+            }
+            printf("Contato editado com sucesso!\n");
+            return 1;
+        }
+    }
+    printf("Contato não encontrado.\n");
+    return 0;
+}
