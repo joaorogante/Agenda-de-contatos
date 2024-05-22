@@ -130,3 +130,15 @@ int removerContato(Contato contatos[], int *totalContatos) {
     printf("Contato não encontrado.\n");
     return 0;
 }
+int salvarAgendaBinaria(Contato contatos[], int totalContatos, const char *filename) {
+    FILE *file = fopen(filename, "wb");
+    if (!file) {
+        perror("Erro ao abrir o arquivo para escrita");
+        return 0;
+    }
+    fwrite(&totalContatos, sizeof(int), 1, file);
+    fwrite(contatos, sizeof(Contato), totalContatos, file);
+    fclose(file);
+    printf("Agenda salva com sucesso!\n");
+    return 1;
+}
