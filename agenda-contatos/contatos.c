@@ -142,3 +142,15 @@ int salvarAgendaBinaria(Contato contatos[], int totalContatos, const char *filen
     printf("Agenda salva com sucesso!\n");
     return 1;
 }
+int carregarAgendaBinaria(Contato contatos[], int *totalContatos, const char *filename) {
+    FILE *file = fopen(filename, "rb");
+    if (!file) {
+        perror("Erro ao abrir o arquivo para leitura");
+        return 0;
+    }
+    fread(totalContatos, sizeof(int), 1, file);
+    fread(contatos, sizeof(Contato), *totalContatos, file);
+    fclose(file);
+    printf("Agenda carregada com sucesso!\n");
+    return 1;
+}
