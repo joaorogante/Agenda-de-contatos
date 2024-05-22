@@ -1,24 +1,26 @@
-# Agenda-de-contatos
+# Gerenciador de Contatos
 
-Objetivo do Projeto:
-O objetivo deste projeto é criar um programa em C que gerencia uma agenda de contatos. Ele permite ao usuário adicionar, listar, excluir contatos e salvar/carregar a agenda em/de um arquivo binário.
+## Descrição do Projeto
 
-Funcionalidades:
-1. **Adicionar contatos**: O programa permite adicionar até 255 contatos na agenda. Cada contato contém informações como nome, sobrenome, email e número de telefone.
+Este projeto é um gerenciador de contatos em C que permite ao usuário adicionar, editar, listar, remover e salvar contatos em duas categorias: pessoais e de trabalho. O programa armazena os contatos em arquivos binários e inclui validação de email e verificação de unicidade de telefone.
 
-2. **Listar contatos**: O usuário pode listar todos os contatos presentes na agenda.
+## Funcionalidades
 
-3. **Deletar contatos**: É possível excluir um contato da agenda fornecendo seu número de telefone.
+- Adicionar contatos (pessoais ou de trabalho)
+- Editar contatos existentes
+- Listar todos os contatos
+- Remover contatos
+- Salvar contatos em arquivos binários
+- Carregar contatos de arquivos binários
 
-4. **Salvar agenda**: A agenda completa de contatos pode ser salva em um arquivo binário chamado "agenda.bin".
+## Estrutura do Projeto
 
-5. **Carregar agenda**: O programa pode carregar a agenda de contatos anteriormente salva no arquivo "agenda.bin".
+- `main.c` - Contém a função principal e o menu de navegação.
+- `contatos.c` - Implementa as funções para gerenciar os contatos.
+- `contatos.h` - Define a estrutura do contato e declara as funções.
 
-## Compilação e Execução:
-O projeto é composto por três arquivos: main.c, contatos.c e contatos.h.
+## Como Compilar
 
-Para compilar e executar o programa, utilize os seguintes comandos:
+Para compilar o projeto, você precisa de um compilador C (como gcc). Abra o terminal na raiz do projeto e execute o seguinte comando:
 
-```bash
-gcc -o agenda main.c contatos.c
-./agenda
+gcc main.c contatos.c -o gerenciador_contatos
