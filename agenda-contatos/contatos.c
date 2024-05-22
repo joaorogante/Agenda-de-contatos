@@ -154,3 +154,7 @@ int carregarAgendaBinaria(Contato contatos[], int *totalContatos, const char *fi
     printf("Agenda carregada com sucesso!\n");
     return 1;
 }
+void limparBufferEntrada(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
