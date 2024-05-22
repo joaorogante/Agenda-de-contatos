@@ -23,3 +23,40 @@ int telefoneUnico(const char *telefone, Contato contatos[], int totalContatos) {
     }
     return 1;
 }
+int adicionarContato(Contato contatos[], int *totalContatos) {
+    char nome[50], sobrenome[50], email[50], telefone[15];
+    printf("Nome: ");
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = '\0';  // Remove the newline character
+
+    printf("Sobrenome: ");
+    fgets(sobrenome, sizeof(sobrenome), stdin);
+    sobrenome[strcspn(sobrenome, "\n")] = '\0';  // Remove the newline character
+
+    printf("Email: ");
+    fgets(email, sizeof(email), stdin);
+    email[strcspn(email, "\n")] = '\0';
+
+    printf("Telefone: ");
+    fgets(telefone, sizeof(telefone), stdin);
+    telefone[strcspn(telefone, "\n")] = '\0';
+
+    if (!validarEmail(email)) {
+        printf("Formato de email inválido.\n");
+        return 0;
+    }
+    if (!telefoneUnico(telefone, contatos, *totalContatos)) {
+        printf("Telefone já existe.\n");
+        return 0;
+    }
+    if (*totalContatos >= MAX_CONTATOS) {
+        printf("Lista de contatos cheia.\n");
+        return 0;
+    }
+    snprintf(contatos[*totalContatos].nome, sizeof(contatos[*totalContatos].nome), "%s %s", nome, sobrenome);
+    strcpy(contatos[*totalContatos].email, email);
+    strcpy(contatos[*totalContatos].telefone, telefone);
+    (*totalContatos)++;
+    printf("Contato adicionado com sucesso!\n");
+    return 1;
+}
