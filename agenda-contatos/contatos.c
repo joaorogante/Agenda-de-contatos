@@ -111,3 +111,22 @@ void listarContatos(Contato contatos[], int totalContatos) {
         printf("-------------------------------------------------\n");
     }
 }
+int removerContato(Contato contatos[], int *totalContatos) {
+    char telefone[15];
+    printf("Telefone do contato a ser removido: ");
+    fgets(telefone, sizeof(telefone), stdin);
+    telefone[strcspn(telefone, "\n")] = '\0';
+
+    for (int i = 0; i < *totalContatos; i++) {
+        if (strcmp(contatos[i].telefone, telefone) == 0) {
+            for (int j = i; j < *totalContatos - 1; j++) {
+                contatos[j] = contatos[j + 1];
+            }
+            (*totalContatos)--;
+            printf("Contato removido com sucesso!\n");
+            return 1;
+        }
+    }
+    printf("Contato não encontrado.\n");
+    return 0;
+}
